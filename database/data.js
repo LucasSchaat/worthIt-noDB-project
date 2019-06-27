@@ -39,20 +39,8 @@ const stockData = [
         totalInvested: 13972.50,
         capGain: 2551.50,
         newShares: 0
-    },
-    {
-        ticker: 'NOT',
-        name: 'Template',
-        price: 110.16,
-        exchange: 'NYSE',
-        chart: '/images/WMT.png',
-        initalPurchasePrice: 0,
-        priceChange: 0,
-        sharesOwned: 0,
-        totalInvested: 0,
-        capGain: 0,
-        newShares: 0
     }
+    
 ]
 
 module.exports = {

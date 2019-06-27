@@ -3,17 +3,25 @@ let data = rawData.stockData
 
 module.exports = {
     currentPortfolio (req, res) {
-        let currentPortfolio = data.filter(stock => stock.sharesOwned > 0)
-        res.status(200).send(currentPortfolio)
+        res.status(200).send(data)
     },
     updateShareCount(req, res) {
-        let currentPortfolio = data.filter(stock => stock.sharesOwned > 0)
         let { ticker } = req.params
         let { updatedCount } = req.query
-        let index = currentPortfolio.findIndex( stock => stock.ticker === ticker)
-        currentPortfolio[index].sharesOwned = +updatedCount
-        res.status(200).send(currentPortfolio)
-        console.log(updatedCount)
+        let index = data.findIndex( stock => stock.ticker === ticker)
+        data[index].sharesOwned = +updatedCount
+        res.status(200).send(data)
+    },
+    deleteStock(req, res) {
+        let { ticker } = req.params
+        let index = data.findIndex( stock => stock.ticker === ticker )
+        index !== -1 && data.splice(index, 1)
+        res.status(200).send(data)
+    },
+    buyNewStock(req, res) {
+        let { stockData } = req.body
+        data.push(stockData)
+        res.status(200).send(data)
     }
     
 }

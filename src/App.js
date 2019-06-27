@@ -18,7 +18,6 @@ class App extends Component {
     axios
       .get('/api/portfolio')
       .then( res => {
-        console.log('res:', res)
         this.setState({ currentPortfolio: res.data })
       })
   }
@@ -32,11 +31,31 @@ class App extends Component {
     .catch( err => console.log('Error'))
   }
 
+  sellAllShares = ticker => {
+    axios
+    .delete(`/api/portfolio/${ticker}`)
+    .then(res => {
+      this.setState({ currentPortfolio: res.data })
+    })
+    .catch(err => console.log('Error'))
+  }
+
+  buyNewStock = stockData => {
+    axios
+    .post('/api/portfolio/add', {stockData})
+    .then(res => {
+      this.setState({ currentPortfolio: res.data})
+    })
+    .catch(err => console.log('Error'))
+  }
+
   render() {
     return (
       <div className="App">
         <div className='header'>
-          <Header />
+          <Header 
+            buyNewStock={this.buyNewStock}
+          />
         </div>
         <div className='mainContent'>
             <div className='totalMenu'>
@@ -49,6 +68,7 @@ class App extends Component {
                   key={stock.ticker}
                   stock={stock}
                   updateShareCount={this.updateShareCount}
+                  sellAllShares={this.sellAllShares}
                 />
               )
             })}

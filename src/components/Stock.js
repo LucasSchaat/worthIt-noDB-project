@@ -24,12 +24,13 @@ class Stock extends Component {
             if (Number.isInteger(+this.state.soldShares)) {
                 if( this.state.soldShares < this.props.stock.sharesOwned) {
                     let newShareCount = this.state.newShares - +this.state.soldShares
-                    this.setState ({ newShares: newShareCount })
-                    this.props.updateShareCount(this.state.newShares, this.props.stock.ticker)
+                    this.setState ({ newShares: newShareCount }, () => {
+                        this.props.updateShareCount(this.state.newShares, this.props.stock.ticker)
+                    })
                 } else if (this.state.soldShares > this.props.stock.sharesOwned) {
                     alert('Not Able to Sell More Than You Own - No Margin Trading!')
                 } else {
-                    // ADD DELETE FUNCTIONALITY HERE
+                    this.props.sellAllShares(this.props.stock.ticker)
                 }
             } else {
                 alert('Input Value Not a Number!')
@@ -37,8 +38,9 @@ class Stock extends Component {
         } else {
             if (Number.isInteger(+this.state.soldShares)) {
                 let newShareCount = this.state.newShares + +this.state.boughtShares
-                this.setState ({ newShares: newShareCount })
-                this.props.updateShareCount(this.state.newShares, this.props.stock.ticker)
+                this.setState ({ newShares: newShareCount }, () => {
+                    this.props.updateShareCount(this.state.newShares, this.props.stock.ticker)
+                })
             } else {
                 alert('Input Value Not a Number!')
             }
