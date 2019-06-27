@@ -11,7 +11,8 @@ const stockData = [
         priceChange: 8.41,
         sharesOwned: 135,
         totalInvested: 10008.90,
-        capGain: 1135.35
+        capGain: 1135.35,
+        newShares: 0
     },
     {
         ticker: 'DATA',
@@ -23,7 +24,8 @@ const stockData = [
         priceChange: 42.10,
         sharesOwned: 100,
         totalInvested: 12000.00,
-        capGain: 4210.00
+        capGain: 4210.00,
+        newShares: 0
     },
     {
         ticker: 'WMT',
@@ -35,7 +37,8 @@ const stockData = [
         priceChange: 17.01,
         sharesOwned: 150,
         totalInvested: 13972.50,
-        capGain: 2551.50
+        capGain: 2551.50,
+        newShares: 0
     },
     {
         ticker: 'NOT',
@@ -47,7 +50,8 @@ const stockData = [
         priceChange: 0,
         sharesOwned: 0,
         totalInvested: 0,
-        capGain: 0
+        capGain: 0,
+        newShares: 0
     }
 ]
 

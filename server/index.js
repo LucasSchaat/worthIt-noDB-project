@@ -6,6 +6,7 @@ const { SERVER_PORT } = process.env
 const app = express()
 
 app.get('/api/portfolio', sc.currentPortfolio)
+app.put('/api/portfolio/:ticker', sc.updateShareCount)
 
 
 app.listen(SERVER_PORT, () => {

@@ -23,6 +23,15 @@ class App extends Component {
       })
   }
 
+  updateShareCount = (sharesOwned, ticker) => {
+    axios
+    .put(`api/portfolio/${ticker}?updatedCount=${sharesOwned}`)
+    .then( res => {
+      this.setState({ currentPortfolio: res.data})
+    })
+    .catch( err => console.log('Error'))
+  }
+
   render() {
     return (
       <div className="App">
@@ -39,6 +48,7 @@ class App extends Component {
                 <Stock 
                   key={stock.ticker}
                   stock={stock}
+                  updateShareCount={this.updateShareCount}
                 />
               )
             })}
