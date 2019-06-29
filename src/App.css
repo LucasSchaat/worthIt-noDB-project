@@ -219,27 +219,43 @@ body {
   font-size: 10px;
   font-weight: 500;
   margin-top: -2px;
-  margin-bottom: 30px;
+  margin-bottom: 27px;
 }
 
 .accountName {
   margin-top: 20px;
   font-size: 16px;
-  color: #325A63;
+  color: white;
 }
 
 .accountAmount {
   margin-top: 2px;
   font-size: 22px;
   font-weight: 600;
-  color: #325A63;
+  color: white;
+}
+
+.netWorthBox {
+  margin-top: 11px;
+  width: 100%;
+  height: 12%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #325A63;
 }
 
 .netWorth {
-  margin-top: 40px;
   font-size: 20px;
   font-weight: 600;
-  color: #325A63;
+  color: white;
+}
+
+.netWorthAmount {
+  margin-top: 2px;
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
 }
 
 
@@ -267,16 +283,17 @@ body {
 }
 
 .mainBottom {
-  width: 27%;
+  width: 180px;
   display: flex;
   justify-content: space-around;
 }
 
 .bottomLinks {
-
+  width: 75px;
 }
 
 .copyright {
   width: 27%;
-  
+  text-align: right;
+  padding-right: 10px
 }

@@ -70,7 +70,6 @@ class Stock extends Component {
     render() {
         let { stock } = this.props
         let { buyTrade, sellTrade, boughtShares, soldShares, totalInvestment } = this.state
-        console.log(this.state.accountBalance)
 
         return (
             <div className='stockInfo'>
@@ -79,11 +78,11 @@ class Stock extends Component {
                         <div className='ticker'>{`${stock.name}  (${stock.ticker})`}</div>
                         <div className='exchange'>{stock.exchange}</div>
                     </div>
-                    <div className='price'>{`$${Number(stock.price).toFixed(2)}`}</div>
+                    <div className='price'>{Number(stock.price).toLocaleString('en', {style:'currency', currency:'USD'})}</div>
                 </div>
                 <div>
                     <img className='stockChart' src={stock.chart} alt='Stock chart'/>
-                    <div className='shares'>Shares Owned: {this.state.newShares}</div>
+                    <div className='shares'>Shares Owned: {Number(this.state.newShares).toFixed(0)}</div>
                     
                     {/* SELL SHARES */}
                     <div className='buySellButtonsContainer'>
@@ -107,8 +106,8 @@ class Stock extends Component {
                         )}
                     </div >
                     <div className='gainsAndInvestment'>
-                        <div>{`Total Investment: $${Number(totalInvestment).toFixed(2)}`}</div>
-                        <div>{`Total Gains: $${Number(stock.capGain).toFixed(2)}`}</div>
+                        <div>{`Total Investment: ${Number(totalInvestment).toLocaleString('en', {style:'currency', currency:'USD'})}`}</div>
+                        <div>{`Total Gains: ${Number(stock.capGain).toLocaleString('en', {style:'currency', currency:'USD'})}`}</div>
                     </div>
                 </div>
             </div>

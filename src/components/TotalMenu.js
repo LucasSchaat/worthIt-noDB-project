@@ -15,17 +15,19 @@ class TotalMenu extends Component {
                 <div className='personName'>Andrew Bernard</div>
                 <div className='nickname'>Andy "NardDog" Bernard</div>
                 <div className='accountName'>Trust Fund</div>
-                <div className='accountAmount'>${this.props.accountTotal}</div>
+                <div className='accountAmount'>{Number(this.props.accountTotal).toLocaleString('en', {style: 'currency', currency: 'USD'})}</div>
                 <div className='accountName'>Capital Gains</div>
-                <div className='accountAmount'>${this.props.currentPortfolio.reduce((acc, current) => {
-                    return acc = acc + current.capGain},0)}
+                <div className='accountAmount'>{Number(this.props.currentPortfolio.reduce((acc, current) => {
+                    return acc = acc + current.capGain},0)).toLocaleString('en', {style:'currency', currency:'USD'})}
                 </div>
                 <div className='accountName'>Total Invested</div>
-                <div className='accountAmount'>${this.props.currentPortfolio.reduce((acc, current) => {
-                    return acc += current.totalInvested},0)}
+                <div className='accountAmount'>{Number(this.props.currentPortfolio.reduce((acc, current) => {
+                    return acc += current.totalInvested},0)).toLocaleString('en', {style:'currency', currency:'USD'})}
                 </div>
-                <div className='netWorth'>Total Net Worth</div>
-                <div className='accountAmount'>$120000</div>
+                <div className='netWorthBox'>
+                    <div className='netWorth'>Total Net Worth</div>
+                    <div className='netWorthAmount'>{Number(120000).toLocaleString('en', {style: 'currency', currency: 'USD'})}</div>
+                </div>
             </div>
         )
     }

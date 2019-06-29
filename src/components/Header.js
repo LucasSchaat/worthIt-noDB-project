@@ -17,9 +17,11 @@ class Header extends Component {
 
     buyNewStock = async () => {
         this.flipEdit()
-        let newStock = stockData.find( stock => stock.ticker === this.state.newTicker)
-        await this.setState({ newStockData: newStock, newTicker: ''})
-        this.props.buyNewStock(this.state.newStockData)
+        if(this.state.newTicker !== '') {
+            let newStock = stockData.find( stock => stock.ticker === this.state.newTicker)
+            await this.setState({ newStockData: newStock, newTicker: ''})
+            this.props.buyNewStock(this.state.newStockData)
+        }
     }
 
     handleChange = e => {
