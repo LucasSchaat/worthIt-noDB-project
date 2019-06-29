@@ -8,12 +8,20 @@ class Stock extends Component {
             sellTrade: false,
             boughtShares: 0,
             soldShares: 0,
-            newShares: props.stock.sharesOwned
+            newShares: props.stock.sharesOwned,
+            totalInvestment: props.stock.totalInvested,
+            accountBalance: props.accountTotal
         }
         this.flipEdit = this.flipEdit.bind(this)
         this.updateShares = this.updateShares.bind(this)
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.accountTotal !== this.props.accountTotal) {
+            this.setState({ accountBalance: this.props.accountTotal })
+        }
+    }
+    
     flipEdit(name) {
         this.setState ({ [name]: !this.state[name] })
     }
@@ -24,13 +32,18 @@ class Stock extends Component {
             if (Number.isInteger(+this.state.soldShares)) {
                 if( this.state.soldShares < this.props.stock.sharesOwned) {
                     let newShareCount = this.state.newShares - +this.state.soldShares
-                    this.setState ({ newShares: newShareCount }, () => {
-                        this.props.updateShareCount(this.state.newShares, this.props.stock.ticker)
+                    let newTotalInvested = this.state.totalInvestment - (this.props.stock.price * +this.state.soldShares)
+                    let updatedBalance = this.state.accountBalance + (this.props.stock.price * +this.state.soldShares)
+                    this.setState ({ newShares: newShareCount, totalInvestment: newTotalInvested, accountBalance: updatedBalance }, () => {
+                        this.props.updateShareCount(this.state.newShares, this.props.stock.ticker, this.state.totalInvestment, this.state.accountBalance)
                     })
                 } else if (this.state.soldShares > this.props.stock.sharesOwned) {
                     alert('Not Able to Sell More Than You Own - No Margin Trading!')
                 } else {
-                    this.props.sellAllShares(this.props.stock.ticker)
+                    let updatedBalance = this.state.accountBalance + (this.props.stock.price * +this.state.soldShares)
+                    this.setState ({ accountBalance: updatedBalance }, () => {
+                        this.props.sellAllShares(this.props.stock.ticker, this.state.accountBalance)
+                    })
                 }
             } else {
                 alert('Input Value Not a Number!')
@@ -38,8 +51,10 @@ class Stock extends Component {
         } else {
             if (Number.isInteger(+this.state.soldShares)) {
                 let newShareCount = this.state.newShares + +this.state.boughtShares
-                this.setState ({ newShares: newShareCount }, () => {
-                    this.props.updateShareCount(this.state.newShares, this.props.stock.ticker)
+                let newTotalInvested = this.state.totalInvestment + (this.props.stock.price * +this.state.boughtShares)
+                let updatedBalance = this.state.accountBalance - (this.props.stock.price * +this.state.boughtShares)
+                this.setState ({ newShares: newShareCount, totalInvestment: newTotalInvested, accountBalance: updatedBalance }, () => {
+                    this.props.updateShareCount(this.state.newShares, this.props.stock.ticker, this.state.totalInvestment, this.state.accountBalance)
                 })
             } else {
                 alert('Input Value Not a Number!')
@@ -54,38 +69,47 @@ class Stock extends Component {
     
     render() {
         let { stock } = this.props
-        let { buyTrade, sellTrade, boughtShares, soldShares } = this.state
-        
+        let { buyTrade, sellTrade, boughtShares, soldShares, totalInvestment } = this.state
+        console.log(this.state.accountBalance)
+
         return (
-            <div>
+            <div className='stockInfo'>
+                <div className='priceNameDisplay'>
+                    <div className='nameDisplay'>
+                        <div className='ticker'>{`${stock.name}  (${stock.ticker})`}</div>
+                        <div className='exchange'>{stock.exchange}</div>
+                    </div>
+                    <div className='price'>{`$${Number(stock.price).toFixed(2)}`}</div>
+                </div>
                 <div>
-                    <div>{`${stock.name}  (${stock.ticker})`}</div>
-                    <div>{stock.exchange}</div>
-                    <div>{`$${Number(stock.price).toFixed(2)}`}</div>
                     <img className='stockChart' src={stock.chart} alt='Stock chart'/>
-                    <div>Shares Owned: {this.state.newShares}</div>
+                    <div className='shares'>Shares Owned: {this.state.newShares}</div>
                     
                     {/* SELL SHARES */}
-                    {sellTrade ? (
-                        <div>
-                            <input value={soldShares} onChange={this.handleChange} name='soldShares' />
-                            <button name='sellTrade' onClick={e => this.updateShares(e.target.name)}>Submit Trade</button>
-                        </div>
-                    ) : (
-                        <button name='sellTrade' onClick={e => this.flipEdit(e.target.name)}>Sell Shares</button>
-                    )}
-                    
-                    {/* BUY SHARES */}
-                    {buyTrade ? (
-                        <div>
-                            <input value={boughtShares} onChange={this.handleChange} name='boughtShares' />
-                            <button name='buyTrade' onClick={e => this.updateShares(e.target.name)}>Submit Trade</button>
-                        </div>
-                     ) : (
-                        <button name='buyTrade' onClick={e => this.flipEdit(e.target.name)}>Buy Shares</button>
-                    )}
-                    
-                    <div>{`Capital Gains: $${Number(stock.capGain).toFixed(2)}`}</div>
+                    <div className='buySellButtonsContainer'>
+                        {sellTrade ? (
+                            <div className='inputButtonArea'>
+                                <button className='sellButton' name='sellTrade' onClick={e => this.updateShares(e.target.name)}>Submit Trade</button>
+                                <input className='buySellInput' value={soldShares} onChange={this.handleChange} name='soldShares' />
+                            </div>
+                        ) : (
+                            <button className='sellButton' name='sellTrade' onClick={e => this.flipEdit(e.target.name)}>Sell Shares</button>
+                        )}
+                        
+                        {/* BUY SHARES */}
+                        {buyTrade ? (
+                            <div className='inputButtonArea'>
+                                <input className='buySellInput' value={boughtShares} onChange={this.handleChange} name='boughtShares' />
+                                <button className='buyButton' name='buyTrade' onClick={e => this.updateShares(e.target.name)}>Submit Trade</button>
+                            </div>
+                        ) : (
+                            <button className='buyButton' name='buyTrade' onClick={e => this.flipEdit(e.target.name)}>Buy Shares</button>
+                        )}
+                    </div >
+                    <div className='gainsAndInvestment'>
+                        <div>{`Total Investment: $${Number(totalInvestment).toFixed(2)}`}</div>
+                        <div>{`Total Gains: $${Number(stock.capGain).toFixed(2)}`}</div>
+                    </div>
                 </div>
             </div>
         )

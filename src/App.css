@@ -2,6 +2,7 @@ body {
   width: 100vw;
 }
 
+/* STYLING FOR ENTIRE APP */
 .App {
   width: 100%;
   text-align: center;
@@ -9,27 +10,273 @@ body {
   flex-direction: column;
 }
 
+
+/* STYLING FOR HEADER */
 .header {
   height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-weight: 500;
+  font-size: 10px;
+  background-color: #325A63;
 }
 
+.links {
+  display: flex;
+  margin: 10px;
+  width: 300px;
+  justify-content: space-around;
+}
+
+.headerLinks {
+  margin-right: 2%;
+  text-decoration: underline;
+}
+
+.searchBar {
+  width: 60%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.newStock {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.buyNewButton {
+  margin-left: 32%;
+  color: white;
+  background-color: transparent;
+  height: 30px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 7px #2e2e2e;
+}
+
+.buyNewInput {
+  width: 40%;
+  margin-left: 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+}
+
+
+/* STYLING FOR MAIN SECTION - Including Stock information and Total Sidebar components*/
+.mainContent {
+  width: 100%;
+  display: flex;
+  background-size: 100% 100%;
+  background-image: url('https://images.unsplash.com/photo-1438803235109-d737bc3129ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=666&q=80');
+  background-repeat: no-repeat;
+  background-attachment: fixed
+}
+
+
+/* STYLING FOR STOCK SECTION */
 .stockContainer {
+  width: 100%;
+  margin-left: 18%;
+}
+
+.stockInfo {
+  width: 40%;
+  height: 375px;
+  display: inline-block;
+  position: relative;
+  margin: 20px;
+  color: white;
+  background-color: #325A63;
+  opacity: 0.8;
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px black;
+}
+
+.priceNameDisplay {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nameDisplay {
+  width: 75%;
   display: flex;
   flex-direction: column;
-  margin-left: 15%;
+  align-items: baseline;
+  margin: 10px;
 }
 
-.mainContent {
-  display: flex;
+.price {
+  margin: 10px;
+}
+
+.exchange {
+  font-size: 10px;
 }
 
 .stockChart {
-  width: 60%;
+  width: 320px;
+  height: 200px;
+  box-shadow: 2px 5px 10px black;
 }
 
+.shares {
+  margin: 10px 0 0 0;
+}
+
+.buySellButtonsContainer {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sellButton {
+  margin-left: 10px;
+  color: white;
+  background-color: transparent;
+  border-radius: 5px;
+  box-shadow: 1px 1px 7px #2e2e2e;
+}
+
+.buyButton {
+  margin-right: 10px;
+  color: white;
+  background-color: transparent;
+  border-radius: 5px;
+  box-shadow: 1px 1px 7px #2e2e2e;
+}
+
+.buySellInput {
+  margin: 0 5px;
+  width: 80px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  color: white
+}
+
+.gainsAndInvestment {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin-left: 10px;
+  font-size: 18px;
+}
+
+
+/* STYLING FOR FIXED MENU */
 .totalMenu {
   height: 100vh;
-  width: 30%;
+  width: 18%;
+  top: 0;
   position: fixed;
-  top: 10vh;
+  background-color: #77c9d4a2;
+  color: white;
+  font-family: 'DM Serif Display', serif;
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.logoContainer {
+  background-color: #325A63;
+  height: 10vh;
+  width: 100%;
+}
+
+.logo {
+  margin-top: 5px;
+  width: 60%;
+  margin-right: 50px;
+}
+
+.menuImage {
+  border-radius: 50%;
+  width: 55%;
+  margin-top: 30px;
+  border-radius: 50%;
+  box-shadow: 3px 3px 10px black;
+}
+
+.personName {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.nickname {
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: -2px;
+  margin-bottom: 30px;
+}
+
+.accountName {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #325A63;
+}
+
+.accountAmount {
+  margin-top: 2px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #325A63;
+}
+
+.netWorth {
+  margin-top: 40px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #325A63;
+}
+
+
+/* STYLING FOR FOOTER */
+.footerContainer {
+  height: 5vh;
+  width: 100%;
+  background-color: #325A63;
+  color: white;
+  font-size: 10px;
+  text-decoration: underline;
+}
+
+.footerObject {
+  margin-left: 18%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.empty {
+  width: 27%;
+  height: 20px;
+}
+
+.mainBottom {
+  width: 27%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bottomLinks {
+
+}
+
+.copyright {
+  width: 27%;
+  
 }

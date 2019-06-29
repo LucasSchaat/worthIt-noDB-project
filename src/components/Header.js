@@ -31,16 +31,23 @@ class Header extends Component {
         let { input, newTicker } = this.state
         
         return (
-            <div>
-                <p>Header</p>
-                {input ? (
-                        <div>
-                            <input value={newTicker} onChange={this.handleChange} name='newTicker' />
-                            <button onClick={this.buyNewStock}>Add Stock to Dashboard</button>
-                        </div>
-                    ) : (
-                        <button onClick={this.flipEdit}>Buy a New Stock</button>
-                )}
+            <div className='header'>
+                <div className='searchBar'>
+                    {input ? (
+                            <div className='newStock'>
+                                <button className='buyNewButton' onClick={this.buyNewStock}>Add Stock to Dashboard</button>
+                                <input className='buyNewInput' value={newTicker} onChange={this.handleChange} name='newTicker' placeholder='Which stock?' />
+                            </div>
+                        ) : (
+                            <button className='buyNewButton' onClick={this.flipEdit}>Buy a New Stock</button>
+                    )}
+                </div>
+                <div className='links'>
+                    <div className='headerLinks'>Investing</div>
+                    <div className='headerLinks'>Cash Management</div>
+                    <div className='headerLinks'>Recent News</div>
+                    <div className='headerLinks'>Logout</div>
+                </div>
             </div>
         )
     }

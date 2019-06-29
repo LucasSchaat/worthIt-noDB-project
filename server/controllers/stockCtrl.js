@@ -8,8 +8,10 @@ module.exports = {
     updateShareCount(req, res) {
         let { ticker } = req.params
         let { updatedCount } = req.query
+        let { updatedInvestment } = req.query
         let index = data.findIndex( stock => stock.ticker === ticker)
         data[index].sharesOwned = +updatedCount
+        data[index].totalInvested = +updatedInvestment
         res.status(200).send(data)
     },
     deleteStock(req, res) {
