@@ -74,9 +74,6 @@ const stockData = [
     
 ]
 
-const accountTotal = 9515.25
-
 module.exports = {
-    stockData,
-    accountTotal
+    stockData
 }

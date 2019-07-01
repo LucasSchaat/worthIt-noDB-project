@@ -31,10 +31,12 @@ class Header extends Component {
                 this.props.buyNewStock(this.state.newStockData)
             } else {
                 toast.error('This Stock is Already Part of the Dashboard!')
+                this.setState({ newTicker: '' })
             }
         } else if (this.state.newTicker === '') {
         } else {
             toast.error('Sorry, This Ticker is Either Invalid or Is Not Trading on the Market Today! Please Choose Another Ticker!')
+            this.setState({ newTicker: '' })
         }
     }
 

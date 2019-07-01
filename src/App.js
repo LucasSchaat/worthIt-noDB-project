@@ -13,7 +13,7 @@ class App extends Component {
     super()
     this.state = {
       currentPortfolio: [],
-      accountTotal: 0
+      accountTotal: 9515.25
     }
   }
 
@@ -21,7 +21,7 @@ class App extends Component {
     axios
       .get('/api/portfolio')
       .then( res => {
-        this.setState({ currentPortfolio: res.data.data, accountTotal: res.data.accountTotal })
+        this.setState({ currentPortfolio: res.data })
       })
   }
 
@@ -29,7 +29,7 @@ class App extends Component {
     axios
     .put(`api/portfolio/${ticker}?updatedCount=${sharesOwned}&updatedInvestment=${investment}&updatedBalance=${accountBalance}`)
     .then( res => {
-      this.setState({ currentPortfolio: res.data.data, accountTotal: res.data.accountTotal})
+      this.setState({ currentPortfolio: res.data, accountTotal: accountBalance})
     })
     .catch( err => console.log('Error'))
   }
@@ -38,7 +38,7 @@ class App extends Component {
     axios
     .delete(`/api/portfolio/${ticker}?updatedBalance=${accountBalance}`)
     .then(res => {
-      this.setState({ currentPortfolio: res.data.data, accountTotal: res.data.accountTotal })
+      this.setState({ currentPortfolio: res.data, accountTotal: accountBalance})
     })
     .catch(err => console.log('Error'))
   }
