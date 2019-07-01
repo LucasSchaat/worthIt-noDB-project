@@ -49,15 +49,19 @@ class Stock extends Component {
                 alert('Input Value Not a Number!')
             }
         } else {
-            if (Number.isInteger(+this.state.soldShares)) {
-                let newShareCount = this.state.newShares + +this.state.boughtShares
-                let newTotalInvested = this.state.totalInvestment + (this.props.stock.price * +this.state.boughtShares)
-                let updatedBalance = this.state.accountBalance - (this.props.stock.price * +this.state.boughtShares)
-                this.setState ({ newShares: newShareCount, totalInvestment: newTotalInvested, accountBalance: updatedBalance }, () => {
-                    this.props.updateShareCount(this.state.newShares, this.props.stock.ticker, this.state.totalInvestment, this.state.accountBalance)
-                })
+            if (this.state.accountBalance - (this.props.stock.price * +this.state.boughtShares) > 0) {
+                if (Number.isInteger(+this.state.soldShares)) {
+                    let newShareCount = this.state.newShares + +this.state.boughtShares
+                    let newTotalInvested = this.state.totalInvestment + (this.props.stock.price * +this.state.boughtShares)
+                    let updatedBalance = this.state.accountBalance - (this.props.stock.price * +this.state.boughtShares)
+                    this.setState ({ newShares: newShareCount, totalInvestment: newTotalInvested, accountBalance: updatedBalance }, () => {
+                        this.props.updateShareCount(this.state.newShares, this.props.stock.ticker, this.state.totalInvestment, this.state.accountBalance)
+                    })
+                } else {
+                    alert('Input Value Not a Number!')
+                }
             } else {
-                alert('Input Value Not a Number!')
+                alert('Insufficient Funds for Completing this Trade!')
             }
         }
     }
