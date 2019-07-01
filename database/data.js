@@ -42,7 +42,35 @@ const stockData = [
         totalInvested: 13972.50,
         capGain: 2551.50,
         newShares: 0
-    }
+    },
+    {
+        ticker: 'NSANY',
+        name: 'Nissan Motor Co.',
+        price: 14.29,
+        exchange: 'Other OTC',
+        chart: '/images/NSANY.png',
+        initialPurchasePrice: 15.94,
+        priceChange: -1.43,
+        sharesOwned: 100,
+        initialInvestment: 1594.00,
+        totalInvested: 1594.00,
+        capGain: -143.00,
+        newShares: 0
+    },
+    {
+        ticker: 'SPOT',
+        name: 'Spotify Technology',
+        price: 144.79,
+        exchange: 'NYSE',
+        chart: '/images/SPOT.png',
+        initialPurchasePrice: 113.50,
+        priceChange: 31.29,
+        sharesOwned: 450,
+        initialInvestment: 51075,
+        totalInvested: 51075,
+        capGain: 14080.50,
+        newShares: 0
+    },
     
 ]
 

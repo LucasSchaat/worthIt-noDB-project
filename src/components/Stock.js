@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
 
+// Toast notification dependencies
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class Stock extends Component {
     constructor(props) {
         super()
@@ -38,7 +42,7 @@ class Stock extends Component {
                         this.props.updateShareCount(this.state.newShares, this.props.stock.ticker, this.state.totalInvestment, this.state.accountBalance)
                     })
                 } else if (this.state.soldShares > this.props.stock.sharesOwned) {
-                    alert('Not Able to Sell More Than You Own - No Margin Trading!')
+                    toast.error('Not Able to Sell More Than You Own - No Margin Trading!')
                 } else {
                     let updatedBalance = this.state.accountBalance + (this.props.stock.price * +this.state.soldShares)
                     this.setState ({ accountBalance: updatedBalance }, () => {
@@ -46,11 +50,11 @@ class Stock extends Component {
                     })
                 }
             } else {
-                alert('Input Value Not a Number!')
+                toast.error('Input Value Not a Number!')
             }
         } else {
-            if (this.state.accountBalance - (this.props.stock.price * +this.state.boughtShares) > 0) {
-                if (Number.isInteger(+this.state.soldShares)) {
+            if (Number.isInteger(+this.state.boughtShares)) {
+                if (this.state.accountBalance - (this.props.stock.price * +this.state.boughtShares) > 0) {
                     let newShareCount = this.state.newShares + +this.state.boughtShares
                     let newTotalInvested = this.state.totalInvestment + (this.props.stock.price * +this.state.boughtShares)
                     let updatedBalance = this.state.accountBalance - (this.props.stock.price * +this.state.boughtShares)
@@ -58,10 +62,10 @@ class Stock extends Component {
                         this.props.updateShareCount(this.state.newShares, this.props.stock.ticker, this.state.totalInvestment, this.state.accountBalance)
                     })
                 } else {
-                    alert('Input Value Not a Number!')
+                    toast.error('Insufficient Funds for Completing this Transaction!')
                 }
             } else {
-                alert('Insufficient Funds for Completing this Trade!')
+                toast.error('Input Value Not a Number!')
             }
         }
     }

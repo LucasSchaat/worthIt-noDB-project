@@ -5,13 +5,15 @@ import Stock from './components/Stock'
 import Header from './components/Header'
 import TotalMenu from './components/TotalMenu'
 import Footer from './components/Footer'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       currentPortfolio: [],
-      accountTotal: 76121.75
+      accountTotal: 9515.25
     }
   }
 
@@ -54,8 +56,10 @@ class App extends Component {
     return (
       <div className="App">
         <div>
+          <ToastContainer />
           <Header 
             buyNewStock={this.buyNewStock}
+            currentPortfolio={this.state.currentPortfolio}
           />
         </div>
         <div className='mainContent'>

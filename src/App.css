@@ -70,6 +70,7 @@ body {
 
 /* STYLING FOR MAIN SECTION - Including Stock information and Total Sidebar components*/
 .mainContent {
+  min-height: calc(100vh - 80px);
   width: 100%;
   display: flex;
   background-size: 100% 100%;
@@ -199,7 +200,7 @@ body {
 
 .logo {
   margin-top: 5px;
-  width: 60%;
+  width: 115px;
   margin-right: 50px;
 }
 

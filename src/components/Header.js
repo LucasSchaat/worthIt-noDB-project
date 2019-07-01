@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 import { stockData } from '../stockData/additionalData'
 
+// Toast notification dependencies
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class Header extends Component {
     constructor() {
         super()
@@ -17,10 +21,20 @@ class Header extends Component {
 
     buyNewStock = async () => {
         this.flipEdit()
-        if(this.state.newTicker !== '') {
-            let newStock = stockData.find( stock => stock.ticker === this.state.newTicker)
-            await this.setState({ newStockData: newStock, newTicker: ''})
-            this.props.buyNewStock(this.state.newStockData)
+        if(
+            this.state.newTicker !== '' &&
+            stockData.find(stock => stock.ticker === this.state.newTicker) !== undefined
+        ) {
+            if (this.props.currentPortfolio.find(stock => stock.ticker === this.state.newTicker) === undefined) {
+                let newStock = stockData.find( stock => stock.ticker === this.state.newTicker)
+                await this.setState({ newStockData: newStock, newTicker: ''})
+                this.props.buyNewStock(this.state.newStockData)
+            } else {
+                toast.error('This Stock is Already Part of the Dashboard!')
+            }
+        } else if (this.state.newTicker === '') {
+        } else {
+            toast.error('Sorry, This Ticker is Either Invalid or Is Not Trading on the Market Today! Please Choose Another Ticker!')
         }
     }
 
