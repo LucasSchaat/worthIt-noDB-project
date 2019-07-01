@@ -13,7 +13,7 @@ class App extends Component {
     super()
     this.state = {
       currentPortfolio: [],
-      accountTotal: 9515.25
+      accountTotal: 0
     }
   }
 
@@ -21,24 +21,24 @@ class App extends Component {
     axios
       .get('/api/portfolio')
       .then( res => {
-        this.setState({ currentPortfolio: res.data })
+        this.setState({ currentPortfolio: res.data.data, accountTotal: res.data.accountTotal })
       })
   }
 
   updateShareCount = (sharesOwned, ticker, investment, accountBalance) => {
     axios
-    .put(`api/portfolio/${ticker}?updatedCount=${sharesOwned}&updatedInvestment=${investment}`)
+    .put(`api/portfolio/${ticker}?updatedCount=${sharesOwned}&updatedInvestment=${investment}&updatedBalance=${accountBalance}`)
     .then( res => {
-      this.setState({ currentPortfolio: res.data, accountTotal: accountBalance})
+      this.setState({ currentPortfolio: res.data.data, accountTotal: res.data.accountTotal})
     })
     .catch( err => console.log('Error'))
   }
 
   sellAllShares = (ticker, accountBalance) => {
     axios
-    .delete(`/api/portfolio/${ticker}`)
+    .delete(`/api/portfolio/${ticker}?updatedBalance=${accountBalance}`)
     .then(res => {
-      this.setState({ currentPortfolio: res.data, accountTotal: accountBalance })
+      this.setState({ currentPortfolio: res.data.data, accountTotal: res.data.accountTotal })
     })
     .catch(err => console.log('Error'))
   }
