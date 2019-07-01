@@ -46,7 +46,7 @@ const stockData = [
     {
         ticker: 'NSANY',
         name: 'Nissan Motor Co.',
-        price: 14.29,
+        price: 14.51,
         exchange: 'Other OTC',
         chart: '/images/NSANY.png',
         initialPurchasePrice: 15.94,
